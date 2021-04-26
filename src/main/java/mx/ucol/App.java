@@ -41,6 +41,15 @@ public class App {
         Drop drop = new Drop();
 
         new Thread(new Producer(drop)).start();
+        new Thread(new Producer(drop)).start();
+        new Thread(new Producer(drop)).start();
+        new Thread(new Producer(drop)).start();
+        new Thread(new Producer(drop)).start();
+
+        new Thread(new Consumer(drop)).start();
+        new Thread(new Consumer(drop)).start();
+        new Thread(new Consumer(drop)).start();
+        new Thread(new Consumer(drop)).start();
         new Thread(new Consumer(drop)).start();
     }
 }

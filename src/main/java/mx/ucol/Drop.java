@@ -1,11 +1,13 @@
 package mx.ucol;
 
 public class Drop {
-    private String message;
-    private boolean empty = true;
+    private String messages[]  = new String[10];
+    private boolean isEmpty = true;
+    private boolean isFull = false;
+    private int currentPos = 0;
 
     public synchronized String take() {
-        while (empty) {
+        while (isEmpty) {
             try {
                 wait();
             } catch (InterruptedException e) {
@@ -13,21 +15,30 @@ public class Drop {
             }
         }
 
-        empty = true;
+        String response = messages[currentPos - 1];
+        currentPos--;
+
+        if (currentPos == 0) isEmpty = true;
+
+        isFull = false;
         notifyAll();
 
-        return message;
+        return response;
     }
 
     public synchronized void put(String message) {
-        while (!empty) {
+        while (isFull) {
             try {
                 wait();
             } catch (InterruptedException e) {}
         }
 
-        empty = false;
-        this.message = message;
+        messages[currentPos] = message;
+        currentPos++;
+
+        if (currentPos == 9) isFull = true;
+
+        isEmpty = false;
         notifyAll();
     }
 }
