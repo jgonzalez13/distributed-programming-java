@@ -1,0 +1,6 @@
+mx/ucol/handlers/RootHandler.class
+mx/ucol/helpers/DBConnection.class
+mx/ucol/models/Todo.class
+mx/ucol/handlers/TodosHandler.class
+mx/ucol/helpers/JSON.class
+mx/ucol/App.class
